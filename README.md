@@ -4,12 +4,18 @@
 
 See **[http-kit.org](http://http-kit.org)** for documentation, examples, benchmarks, etc.
 
-Current [semantic](http://semver.org/) version:
+Current [semantic](http://semver.org/) versions:
 
-```clj
-[http-kit "2.1.18"]
+```clojure
+[http-kit "2.1.19"]        ; Stable
+[http-kit "2.1.21-alpha2"] ; Dev
 ```
 
+## Library status
+
+http-kit's author ([@shenfeng]) unfortunately hasn't had much time to maintain http-kit recently. In an attempt to help out I'll be doing issue triage, accepting minor/obvious PRs, etc. My own time's pretty limited so **contributors welcome**: looking for pull requests, feedback/ideas, and help dealing with GitHub issues, etc. Please contact me if you'd be interested in lending a hand. Thank you!
+
+\- [@ptaoussanis]
 
 ### Hack locally
 
@@ -36,4 +42,7 @@ Please use the [GitHub issues page](https://github.com/http-kit/http-kit/issues)
 
 ### License
 
-Copyright &copy; 2012-2013 [Feng Shen](http://shenfeng.me/). Distributed under the [Apache License Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
+Copyright &copy; 2012-2015 [Feng Shen](http://shenfeng.me/). Distributed under the [Apache License Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
+
+[@shenfeng]: https://github.com/shenfeng
+[@ptaoussanis]: https://github.com/ptaoussanis

@@ -120,7 +120,16 @@
           (doseq [r requests]
             (is (= 200 (:status @r))))))
       (doseq [_ (range 0 200)]
-        (is (= 200 (:status @(http/get url))))))))
+        (is (= 200 (:status @(http/get url))))))
+
+    (testing "callback exception handling"
+      (let [{error :error} @(http/get (str host "/get")
+                                      (fn [_] (throw (Exception. "Exception"))))]
+        (is (= "Exception" (.getMessage error))))
+
+      (let [{error :error} @(http/get (str host "/get")
+                                      (fn [_] (throw (Throwable. "Throwable"))))]
+        (is (= "Throwable" (.getMessage error)))))))
 
 
 (deftest test-unicode-encoding
@@ -293,6 +302,7 @@
     (is (= 200 (:status @(http/get url {:max-redirects 6}))))
     (is (= 302 (:status @(http/get url {:follow-redirects false}))))
     (is (= "get" (:body @(http/post url {:as :text})))) ; should switch to get method
+    (is (= "post" (:body @(http/post url {:as :text :allow-unsafe-redirect-methods true})))) ; should not change method
     (is (= "post" (:body @(http/post (str url "&code=307") {:as :text})))) ; should not change method
     ))
 

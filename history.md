@@ -1,3 +1,26 @@
+## 2.1.21-alpha2 (2015 Dec 12)
+
+> == 2.1.21-alpha1 (Clojars upload error)
+
+HTTP Server:
+  * [#217] More accurate timeout handling (@mbarbon)
+  * [#130] Server can now respond to HTTP_1.1/Expect : 100-continue header once per request (@valentini)
+
+HTTP Client:
+  * [#201] Client: option to keep "unsafe" method on redirect (@dzaharee)
+
+## [temporary fork] 2.1.20 (2015 Dec 8)
+HTTP Server:
+  1. #86 Allow run-server being called without any opts (@djui)
+  2. #185 Do not set client mode on SSLEngine if already set (@izarov)
+  3. #234 Catch Throwable when delivering response (@msassak)
+  4. #239 HTTP client: keep form params in multipart requests (@skazhy)
+HTTP Client:
+  No changes
+
+## 2.1.19 (2014 Aug 25)
+  ??
+
 ## 2.1.18 (2014/4/18)
 HTTP Server:
   1. #125 NPE on stop_server
