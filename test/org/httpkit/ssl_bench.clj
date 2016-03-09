@@ -2,7 +2,7 @@
   (:use org.httpkit.test-util
         (compojure [core :only [defroutes GET POST HEAD DELETE ANY context]]
                    [handler :only [site]])
-        org.httpkit.server)
+        org.httpkit.server1)
   (:require [org.httpkit.client :as http]))
 
 (defn ssl-handler [req]

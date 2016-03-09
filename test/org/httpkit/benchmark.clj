@@ -1,5 +1,5 @@
 (ns org.httpkit.benchmark
-  (:use org.httpkit.server
+  (:use org.httpkit.server1
         org.httpkit.test-util
         [clojure.tools.cli :only [cli]]))
 

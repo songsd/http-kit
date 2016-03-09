@@ -60,7 +60,9 @@ public class AsyncChannel {
         }
     }
 
-
+    public static void main(String[] args) {
+        System.out.println(closedRanOffset);
+    }
     // messages sent from a WebSocket client should be handled orderly by server
     // Changed from a Single Thread(IO event thread), no volatile needed
     LinkingRunnable serialTask;

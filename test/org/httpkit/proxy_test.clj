@@ -1,5 +1,5 @@
 (ns org.httpkit.proxy-test
-  (:use [org.httpkit.server :only [run-server with-channel send!]]
+  (:use [org.httpkit.server1 :only [run-server with-channel send!]]
         [org.httpkit.client :only [request]]))
 
 (defn- proxy-opts [req]

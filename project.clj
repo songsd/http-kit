@@ -1,13 +1,13 @@
-(defproject http-kit "2.2.0-alpha1"
+(defproject http-kit "2.1.22-SNAPSHOT"
   :author "Feng Shen (@shenfeng)"
   :description "High-performance event-driven HTTP client/server for Clojure"
   :url "http://http-kit.org/"
-  :license {:name "Apache License, Version 2.0"
-            :url "http://www.apache.org/licenses/LICENSE-2.0.html"
+  :license {:name         "Apache License, Version 2.0"
+            :url          "http://www.apache.org/licenses/LICENSE-2.0.html"
             :distribution :repo}
   :min-lein-version "2.3.3"
   :global-vars {*warn-on-reflection* true}
-
+  :sign-releases false
   :dependencies
   [[org.clojure/clojure "1.5.1"]]
 
@@ -19,9 +19,9 @@
 
   :jvm-opts
   ["-Dclojure.compiler.disable-locals-clearing=true"
-   "-Xms1g" "-Xmx1g"] ; Testing https require more memory
+   "-Xms1g" "-Xmx1g"]                                       ; Testing https require more memory
 
-  :javac-options ["-source" "1.6" "-target" "1.6" "-g"]
+  ;:javac-options ["-source" "1.6" "-target" "1.6" "-g"]
   :java-source-paths ["src/java"]
   :test-paths ["test"]
   :jar-exclusions [#"^java.*"] ; exclude the java directory in source path
@@ -29,7 +29,7 @@
   {:default (complement :benchmark)
    :ci  (complement #(or (:benchmark %) (:skip-ci %)))
    :benchmark :benchmark
-   :all (fn [_] true)}
+   :all       (fn [_] true)}
 
   :profiles
   {:test {:java-source-paths ["test/java" "src/java"]}

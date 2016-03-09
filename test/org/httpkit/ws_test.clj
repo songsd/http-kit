@@ -4,7 +4,7 @@
                    [handler :only [site]]
                    [route :only [not-found]])
         org.httpkit.test-util
-        org.httpkit.server)
+        org.httpkit.server1)
   (:require [clj-http.client :as http]
             [org.httpkit.client :as client]
             [http.async.client :as h]
