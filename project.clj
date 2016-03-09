@@ -1,34 +1,34 @@
-(defproject http-kit "2.1.21-alpha2"
+(defproject http-kit "2.1.22-SNAPSHOT"
   :author "Feng Shen (@shenfeng)"
   :description "High-performance event-driven HTTP client/server for Clojure"
   :url "http://http-kit.org/"
-  :license {:name "Apache License, Version 2.0"
-            :url "http://www.apache.org/licenses/LICENSE-2.0.html"
+  :license {:name         "Apache License, Version 2.0"
+            :url          "http://www.apache.org/licenses/LICENSE-2.0.html"
             :distribution :repo}
   :min-lein-version "2.3.3"
   :global-vars {*warn-on-reflection* true}
-
+  :sign-releases false
   :dependencies
   [[org.clojure/clojure "1.4.0"]]
 
   :plugins
-  [[lein-swank   "1.4.4"]
-   [lein-pprint  "1.1.2"]
+  [[lein-swank "1.4.4"]
+   [lein-pprint "1.1.2"]
    [lein-ancient "0.6.8"]
-   [lein-codox   "0.9.0"]]
+   [lein-codox "0.9.0"]]
 
   :jvm-opts
   ["-Dclojure.compiler.disable-locals-clearing=true"
-   "-Xms1g" "-Xmx1g"] ; Testing https require more memory
+   "-Xms1g" "-Xmx1g"]                                       ; Testing https require more memory
 
-  :javac-options ["-source" "1.6" "-target" "1.6" "-g"]
+  ;:javac-options ["-source" "1.6" "-target" "1.6" "-g"]
   :java-source-paths ["src/java"]
-  :test-paths ["test"]
+  :test-paths ["test/java"]
   :jar-exclusions [#".*java$"]
   :test-selectors
-  {:default (complement :benchmark)
+  {:default   (complement :benchmark)
    :benchmark :benchmark
-   :all (fn [_] true)}
+   :all       (fn [_] true)}
 
   :profiles
   {:1.5  {:dependencies [[org.clojure/clojure "1.5.1"]]}

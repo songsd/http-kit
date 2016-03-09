@@ -63,12 +63,14 @@ public class HttpServer implements Runnable {
         serverChannel.register(selector, OP_ACCEPT);
     }
 
+    //todo
     void accept(SelectionKey key) {
         ServerSocketChannel ch = (ServerSocketChannel) key.channel();
         SocketChannel s;
         try {
             while ((s = ch.accept()) != null) {
                 s.configureBlocking(false);
+//                s.getRemoteAddress()
                 HttpAtta atta = new HttpAtta(maxBody, maxLine);
                 SelectionKey k = s.register(selector, OP_READ, atta);
                 atta.channel = new AsyncChannel(k, this);
@@ -145,6 +147,7 @@ public class HttpServer implements Runnable {
                     // close the TCP connection after sent
                     atta.keepalive = false;
                     tryWrite(key, WsEncode(WSDecoder.OPCODE_CLOSE, frame.data));
+//                    atta.decoder.reset();
                 }
             } while (buffer.hasRemaining()); // consume all
         } catch (ProtocolException e) {
@@ -238,9 +241,11 @@ public class HttpServer implements Runnable {
                         selector.wakeup();
                     } else if (!atta.isKeepAlive()) {
                         pending.add(new PendingKey(key, CLOSE_NORMAL));
+                        selector.wakeup();
                     }
                 } catch (IOException e) {
                     pending.add(new PendingKey(key, CLOSE_AWAY));
+                    selector.wakeup();
                 }
             } else {
                 // If has pending write, order should be maintained. (WebSocket)
@@ -299,6 +304,37 @@ public class HttpServer implements Runnable {
         serverThread.start();
     }
 
+    public static void main(String[] args) throws Exception{
+        HttpServer s = new HttpServer("127.0.0.1", 1500,
+                new IHandler() {
+                    @Override
+                    public void handle(HttpRequest request, RespCallback callback) {
+                        System.out.println(request);
+                        System.out.println("haha");
+//                        ByteBuffer bb = ByteBuffer.allocate("haha".getBytes().length);
+//                        bb.put("haha".getBytes());
+//                        callback.run(bb);
+
+                        callback.run(HttpEncode(200, new HeaderMap(), "haha"));
+                    }
+
+                    @Override
+                    public void handle(AsyncChannel channel, Frame frame) {
+
+                    }
+
+                    @Override
+                    public void clientClose(AsyncChannel channel, int status) {
+                        System.out.println("close..");
+                    }
+
+                    @Override
+                    public void close(int timeoutMs) {
+
+                    }
+                }, 1000, 1000, 1000);
+        s.start();
+    }
     public void stop(int timeout) {
         try {
             serverChannel.close(); // stop accept any request

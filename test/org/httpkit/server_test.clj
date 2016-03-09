@@ -6,7 +6,7 @@
         [ring.adapter.jetty :only [run-jetty]]
         (compojure [core :only [defroutes GET POST HEAD DELETE ANY context]]
                    [handler :only [site]])
-        org.httpkit.server
+        org.httpkit.server1
         org.httpkit.timer)
   (:require [clj-http.client :as http]
             [org.httpkit.ws-test :as ws]
